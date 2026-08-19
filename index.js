@@ -19,6 +19,8 @@ const product = {
     thumbnail: 'images/image-product-1-thumbnail.jpg'
 }
 const cartPanelBody = document.querySelector('#cart-panel-body')
+const menuBtn = document.querySelector('#mobile-menu')
+const mobileMenu = document.querySelector('#menu-container')
 const cartPanelBodyText = document.querySelector('#cart-body-text')
 var currentQuantity = document.querySelector('#quantity-value')
 var mainImages = [
@@ -160,10 +162,8 @@ addToCartBtn.addEventListener('click', () => {
     })
 })
 
-const menuBtn = document.querySelector('#mobile-menu')
-const mobileMenu = document.querySelector('#menu-container')
 menuBtn.addEventListener('click', () => {
     mobileMenu.hidden = !mobileMenu.hidden
-    mobileMenu.hidden ? menuBtn.firstElementChild.src = 'images/icon-menu.svg': menuBtn.firstElementChild.src = 'images/icon-close.svg'
+    mobileMenu.hidden ? menuBtn.firstElementChild.src = 'images/icon-menu.svg' : menuBtn.firstElementChild.src = 'images/icon-close.svg'
 
 })
