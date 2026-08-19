@@ -235,7 +235,7 @@ hr {
 }
 
 #product-name {
-    font-size: 50px;
+    font-size: 48px;
     color: hsl(220, 13%, 13%);
     margin-bottom: 30px;
 }
@@ -464,7 +464,32 @@ hr {
     display: none;
 }
 
-@media (max-width:640px) {
+@media (max-width:1200px) {
+    #product-name {
+        margin-bottom: 25px;
+        font-size: 40px;
+    }
+
+    .container {
+        width: 78%;
+    }
+}
+
+@media (max-width:1000px) {
+    hr {
+        width: 90%;
+    }
+
+    .container {
+        width: 85%;
+    }
+
+    nav {
+        width: 90%;
+    }
+}
+
+@media (max-width:912px) {
     body {
         display: flex;
         flex-direction: column;
@@ -501,6 +526,8 @@ hr {
         display: flex;
         align-items: center;
         justify-content: center;
+        height: auto;
+        margin-top: 70px;
     }
 
     .price-and-discount-box {
@@ -561,7 +588,7 @@ hr {
     }
 
     .lightbox-container {
-        width: 100%;
+        width: 60%;
     }
 
     .lightbox-main-image {
@@ -569,7 +596,7 @@ hr {
     }
 
     .lightbox-main-image img {
-        border-radius: 0px;
+        border-radius: 50px;
     }
 
     #cart-panel {
@@ -577,18 +604,23 @@ hr {
     }
 
     #cart-panel-head {
-        height: 10%;
+        height: 7%;
     }
 
     #cart-panel {
-        width: 100%;
-        height: 300px;
+        width: 55%;
+        height: 250px;
         top: 125%;
         right: 0%;
     }
 
     #cart-panel-body {
         height: 80%;
+        align-items: baseline;
+    }
+
+    #checkout-btn {
+        width: 91%;
     }
 
     .nav-left {
@@ -672,5 +704,44 @@ hr {
         left: 50%;
         transform: translateX(-50%) scaleX(0);
         transition: transform 0.2s ease;
+    }
+}
+
+@media (max-width:640px) {
+    .lightbox[hidden] {
+        margin-top: 0px;
+    }
+
+    .lightbox-container {
+        width: 100%;
+    }
+
+    .lightbox-main-image img {
+        border-radius: 0px;
+    }
+
+    .container {
+        padding: 30px 0px;
+    }
+
+    #cart-panel {
+        width: 100%;
+    }
+
+    #cart-panel-body {
+        margin-top: 0px;
+    }
+
+    #checkout-btn {
+        width: 90%;
+    }
+
+    #cart-item-text p{
+        font-size: 14px;
+    }
+
+    #cart-panel-body{
+        justify-content: center;
+        align-items: center;
     }
 }
