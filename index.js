@@ -182,5 +182,4 @@ addToCartBtn.addEventListener('click', () => {
 menuBtn.addEventListener('click', () => {
     mobileMenu.hidden = !mobileMenu.hidden
     mobileMenu.hidden ? menuBtn.firstElementChild.src = 'images/icon-menu.svg' : menuBtn.firstElementChild.src = 'images/icon-close.svg'
-
 })
