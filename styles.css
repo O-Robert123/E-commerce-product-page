@@ -518,7 +518,24 @@ strong {
     nav {
         width: 90%;
     }
+
+    .nav-left {
+        gap: 30px;
+    }
+
+    #nav-list {
+        gap: 25px
+    }
+
+    .nav-right {
+        gap: 30px;
+    }
+
+    .lightbox{
+        display: none;
+    }
 }
+
 
 @media (max-width: 768px) {
     body {
