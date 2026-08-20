@@ -65,9 +65,15 @@ function addQuantity() {
 }
 
 function subtractQuantity() {
-    var newQuantity = Number(currentQuantity.textContent) - 1
-    currentQuantity.textContent = newQuantity
-    console.log(currentQuantity)
+    if (Number(currentQuantity.textContent) > 0) {
+        subtractBtn.disabled = false
+        var newQuantity = Number(currentQuantity.textContent) - 1
+        currentQuantity.textContent = newQuantity
+        console.log(currentQuantity)
+    }
+    else {
+        subtractBtn.disabled = true
+    }
 }
 addBtn.addEventListener('click', addQuantity)
 subtractBtn.addEventListener('click', subtractQuantity)
@@ -96,6 +102,7 @@ nextBtn.addEventListener('click', () => {
     var indexOfSelected = lightboxThumbnailsArray.indexOf(selected)
     console.log(indexOfSelected)
     if (indexOfSelected < lightboxThumbnailsArray.length - 1) {
+        backBtn.disabled = false
         var nextSelected = lightboxThumbnailsArray[indexOfSelected + 1]
         selected.classList.remove('selected')
         selected.firstElementChild.classList.remove('darkened')
@@ -103,13 +110,18 @@ nextBtn.addEventListener('click', () => {
         nextSelected.firstElementChild.classList.add('darkened')
         mainLightboxImage.firstElementChild.src = mainImages[indexOfSelected + 1]
     }
+    else {
+        nextBtn.disabled = true
+    }
 })
 
 backBtn.addEventListener('click', () => {
     var selected = document.querySelector('.lb-gallery.selected')
     var indexOfSelected = lightboxThumbnailsArray.indexOf(selected)
     console.log(indexOfSelected)
+
     if (indexOfSelected > 0) {
+        nextBtn.disabled = false
         var nextSelected = lightboxThumbnailsArray[indexOfSelected - 1]
         selected.classList.remove('selected')
         selected.firstElementChild.classList.remove('darkened')
@@ -117,49 +129,54 @@ backBtn.addEventListener('click', () => {
         nextSelected.firstElementChild.classList.add('darkened')
         mainLightboxImage.firstElementChild.src = mainImages[indexOfSelected - 1]
     }
+    else {
+        backBtn.disabled = true
+    }
 })
 
 addToCartBtn.addEventListener('click', () => {
-    cartPanelBodyText.hidden = true
-    checkoutBtn.hidden = false
-    const cartItem = {
-        ...product,
-        quantity: currentQuantity.textContent
-    }
-    const existingProduct = cartArray.find(item => item.id === cartItem.id)
-    if (existingProduct) {
-        existingProduct.quantity = Number(existingProduct.quantity) + Number(currentQuantity.textContent)
-        cartItem.quantity = existingProduct.quantity
-        const price = document.querySelector('#price-values')
-        price.innerHTML = `$${cartItem.price.toFixed(2)} x ${cartItem.quantity} <strong>$${(cartItem.price * cartItem.quantity).toFixed(2)}</strong>`
-    }
-    else {
-        cartArray.push(cartItem);
-        const itemElement = document.createElement('div')
-        itemElement.classList.add('cart-item')
-        itemElement.innerHTML =
-            `<img src='${cartItem.thumbnail}' id="cart-item-image">
+    if (Number(currentQuantity.textContent) > 0) {
+        cartPanelBodyText.hidden = true
+        checkoutBtn.hidden = false
+        const cartItem = {
+            ...product,
+            quantity: currentQuantity.textContent
+        }
+        const existingProduct = cartArray.find(item => item.id === cartItem.id)
+        if (existingProduct) {
+            existingProduct.quantity = Number(existingProduct.quantity) + Number(currentQuantity.textContent)
+            cartItem.quantity = existingProduct.quantity
+            const price = document.querySelector('#price-values')
+            price.innerHTML = `$${cartItem.price.toFixed(2)} x ${cartItem.quantity} <strong>$${(cartItem.price * cartItem.quantity).toFixed(2)}</strong>`
+        }
+        else {
+            cartArray.push(cartItem);
+            const itemElement = document.createElement('div')
+            itemElement.classList.add('cart-item')
+            itemElement.innerHTML =
+                `<img src='${cartItem.thumbnail}' id="cart-item-image">
         <div id='cart-item-text'><p>${cartItem.name}</p>
         <p id='price-values'>$${cartItem.price.toFixed(2)} x ${cartItem.quantity} <strong>$${(cartItem.price * cartItem.quantity).toFixed(2)}</strong></p></div>
-        <img class='delete-item' src='images/icon-delete.svg'>`
-        cartPanelBody.append(itemElement)
-    }
-    cartCounter.hidden = false
-    cartCounter.textContent = cartItem.quantity
+        <div id='delete-item-box'><img class='delete-item' src='images/icon-delete.svg'></div>`
+            cartPanelBody.append(itemElement)
+        }
+        cartCounter.hidden = false
+        cartCounter.textContent = cartItem.quantity
 
-    const deleteCartItemBtns = document.querySelectorAll('.delete-item')
-    deleteCartItemBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-            this.closest('.cart-item').remove()
-            cartArray.pop()
-            if (cartArray.length === 0) {
-                cartPanelBodyText.hidden = false
-                checkoutBtn.hidden = true
-                cartCounter.hidden = true
-            }
+        const deleteCartItemBtns = document.querySelectorAll('.delete-item')
+        deleteCartItemBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                this.closest('.cart-item').remove()
+                cartArray.pop()
+                if (cartArray.length === 0) {
+                    cartPanelBodyText.hidden = false
+                    checkoutBtn.hidden = true
+                    cartCounter.hidden = true
+                }
+            })
+
         })
-
-    })
+    }
 })
 
 menuBtn.addEventListener('click', () => {
